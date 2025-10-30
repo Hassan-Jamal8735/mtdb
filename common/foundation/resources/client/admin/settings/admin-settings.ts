@@ -147,7 +147,9 @@ export interface AdminServerSettings {
 }
 
 export interface AdminSettings {
-  client: Omit<Settings, 'menus' | 'base_url' | 'site'>;
+  client: Omit<Settings, 'menus' | 'base_url' | 'site' > & {
+    secondaryNavbar?: { label: string; action: string }[];
+  };
   server: AdminServerSettings;
   files: Record<string, any>;
 }

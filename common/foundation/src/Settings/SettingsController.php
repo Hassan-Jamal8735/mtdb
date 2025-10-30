@@ -111,6 +111,11 @@ class SettingsController extends BaseController
         return $changed;
     }
 
+  
+  
+
+
+
     private function handleFiles()
     {
         $files = $this->request->allFiles();

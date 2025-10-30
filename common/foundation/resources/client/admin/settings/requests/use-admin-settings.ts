@@ -29,12 +29,21 @@ export function prepareSettingsForHookForm(obj: any) {
   for (const key in obj) {
     if (Array.isArray(obj[key])) {
       obj[key] = obj[key].map(prepareSettingsForHookForm);
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
       obj[key] = prepareSettingsForHookForm(obj[key]);
     } else if (typeof obj[key] === 'number') {
       obj[key] = obj[key].toString();
     } else if (obj[key] == null) {
       obj[key] = '';
+    } else if (
+      typeof obj[key] === 'string' &&
+      (key === 'secondaryNavbar' || key.includes('secondaryNavbar'))
+    ) {
+      try {
+        obj[key] = JSON.parse(obj[key]);
+      } catch (e) {
+        // leave as-is if it's not valid JSON
+      }
     }
   }
   return obj;

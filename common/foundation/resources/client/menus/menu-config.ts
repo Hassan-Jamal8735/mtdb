@@ -20,3 +20,27 @@ export interface MenuItemConfig {
   subscriptionStatus?: 'subscribed' | 'unsubscribed';
   icon?: IconTree[] | null;
 }
+
+export const secondaryMenu: MenuItemConfig[] = [
+  {
+    id: 'features',
+    type: 'route',
+    order: 1,
+    label: 'Feataures',
+    action: '/features',
+  },
+  {
+    id: 'docs',
+    type: 'route',
+    order: 2,
+    label: 'Docs',
+    action: '/docs',
+  },
+  {
+    id: 'support',
+    type: 'route',
+    order: 3,
+    label: 'Support',
+    action: '/support',
+  },
+];

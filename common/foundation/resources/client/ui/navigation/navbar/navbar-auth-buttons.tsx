@@ -36,14 +36,22 @@ interface DesktopButtonsProps {
 }
 function DesktopButtons({primaryButtonColor}: DesktopButtonsProps) {
   const {registration} = useSettings();
+
+    const customButtonColor = {
+    bg: 'bg-[#29292e]',           // background color
+    text: 'text-white',           // text color
+    hoverBg: 'bg-[#3a3a45]',      // optional hover color
+    hoverText: 'text-white',      // hover text color
+  };
+
   return (
     <div className="text-sm max-md:hidden">
       {!registration?.disable && (
         <Button
           elementType={Link}
           to="/register"
-          variant="text"
-          className="mr-10"
+          variant="raised"
+          className="bg-[#29292e] text-white hover:bg-[#3a3a45] hover:text-white mr-10"
         >
           <Trans message="Register" />
         </Button>
@@ -52,7 +60,7 @@ function DesktopButtons({primaryButtonColor}: DesktopButtonsProps) {
         elementType={Link}
         to="/login"
         variant="raised"
-        color={primaryButtonColor}
+         className="bg-[#29292e] text-white hover:bg-[#3a3a45] hover:text-white"
       >
         <Trans message="Login" />
       </Button>

@@ -1,47 +1,48 @@
-import {defineConfig, Plugin} from 'vite';
+import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import laravel from 'laravel-vite-plugin';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import replace from '@rollup/plugin-replace';
 
-// override laravel plugin base option (from absolute to relative to html base tag)
+// keep manifest paths relative to Laravel's public path
 function basePath(): Plugin {
   return {
-    name: 'test',
+    name: 'relative-base-path',
     enforce: 'post',
-    config: () => {
-      return {
-        base: '',
-      };
-    },
+    config: () => ({ base: '' }),
   };
 }
 
 export default defineConfig({
-server: {
-  host: 'localhost',
-  port: 5173,
-  hmr: {
-    host: 'localhost',
+  server: {
+    host: '127.0.0.1', // ✅ use same host as Laravel
+    port: 5173,
+    hmr: {
+      host: '127.0.0.1', // ✅ ensure HMR matches
+    },
   },
-},
 
   base: '',
-  resolve: {
-    preserveSymlinks: true,
-  },
+
   build: {
+    manifest: true, // ✅ ensures manifest.json is generated
+    outDir: 'public/build', // ✅ matches Laravel’s public path
     sourcemap: true,
     rollupOptions: {
       external: ['puppeteer'],
     },
   },
+
+  resolve: {
+    preserveSymlinks: true,
+  },
+
   plugins: [
     tsconfigPaths(),
     react(),
     laravel({
       input: ['resources/client/main.tsx'],
-      refresh: false,
+      refresh: true, // ✅ you can turn this on for auto-reload
     }),
     basePath(),
     replace({

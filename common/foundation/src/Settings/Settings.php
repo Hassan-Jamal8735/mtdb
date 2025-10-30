@@ -57,6 +57,7 @@ class Settings
         'streaming.qualities',
         'builder.template_categories',
         'publish.default_credentials',
+        'secondaryNavbar',
     ];
 
     public static array $secretKeys = [

@@ -15,7 +15,9 @@ export function MainNavbar({position = 'relative'}: Props) {
     <Navbar
       size="md"
       menuPosition="primary"
-      className={clsx(position, 'z-40 w-full flex-shrink-0')}
+      color="bg-[#cf2e2e]"
+  darkModeColor="bg-[#cf2e2e]"
+      className={clsx(position, 'z-40 w-full flex-shrink-0 container mx-auto @container md:p-48')}
       border="border-none"
       alwaysDarkMode
     >
